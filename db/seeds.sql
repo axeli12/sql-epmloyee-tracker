@@ -24,3 +24,13 @@ VALUES
 
 INSERT INTO employee(first_name, last_name, role_id, manager_id)
 VALUES
+('Mark', 'Smith', 1, 1),
+('Jane', 'Stan', 2, NULL),
+('Tim', 'Star', 3, 2)
+('Rachel', 'Zane', 4, 5),
+('Joahn', 'Till', 5 , NULL),
+('Mike', 'Smith', 6, 8),
+('Mike', 'Bron',7 , 8),
+('John', 'Bo', 8, NULL)
+('Carly', 'Shae', 9, NULL),
+('Tom', 'Smith', 10, 9);
