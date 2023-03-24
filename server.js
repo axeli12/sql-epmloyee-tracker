@@ -1,7 +1,7 @@
 const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
-const cTable = require('console.table');
+// const cTable = require('console.table');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -17,11 +17,12 @@ const db = mysql.createConnection(
         database: 'emp_db'
     },
     console.log(`You have now connceted to the database`)
+
 )
 
 const newStart = () => {
     inquirer
-    .prompt([
+        .prompt([
         {
             name: 'Choice',
             type: 'list',
@@ -104,7 +105,7 @@ const viewAllEmployees = () => {
 
 const addEmployee = () => {
     inquirer
-    .prompt([
+        .prompt([
         {
             type: 'input',
             name: 'first_name',
@@ -225,7 +226,7 @@ const addEmployee = () => {
 
 const addDepartment = () => {
     inquirer 
-    .prompt({
+    .   prompt({
         type: 'input',
         name: 'name',
         message: 'What is the name of the deparment you want to add'
@@ -242,7 +243,7 @@ const addDepartment = () => {
 
 const addRole = () => {
     inquirer
-    .prompt ([
+        .prompt ([
         {
             name: 'title',
             type: 'input',
@@ -294,7 +295,7 @@ const addRole = () => {
 
 const updateEmployeeRole = () => {
     inquirer
-    .prompt([
+        .prompt([
         {
             name: 'employee',
             type: 'list',
@@ -403,7 +404,7 @@ const updateEmployeeRole = () => {
 
 const removeEmployee = () => {
     inquirer
-    .prompt([
+        .prompt([
         {
             name: 'id',
             type:'list',
@@ -463,6 +464,6 @@ const removeEmployee = () => {
     })
 }
 
-// app.listen(PORT, () => {
-//     console.log(`Now listening on ${PORT}`)
-// })
+app.listen(PORT, () => {
+    console.log(`Now listening on ${PORT}`)
+})
