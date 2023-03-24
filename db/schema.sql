@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS emp_db;
 CREATE DATABASE emp_db;
 
-use emp_db
+use emp_db;
 
 CREATE TABLE deparments (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -14,7 +14,7 @@ CREATE TABLE role (
     deparments_id INT,
     salary DECIMAL,
     FOREIGN KEY (deparments_id) REFERENCES deparments(id)
-),
+);
 
 CREATE TABLE employee (
     id INT AUTO_INCREMENT PRIMARY KEY,
