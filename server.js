@@ -31,7 +31,7 @@ const newStart = () => {
         {
             name: 'Choice',
             type: 'list',
-            message: 'Please Choose One to Contonie next steps',
+            message: 'Please Choose One to continue to next steps',
             choices: [
                 'View All Departments',
                 'View All Roles',
@@ -82,18 +82,18 @@ const newStart = () => {
 
 const viewAllDepartments = () => {
     const ql = `SELECT * FROM deparments`;
-    db.query(ql, (err, results) => {
+    db.query(ql, (err, rows) => {
         if (err) throw err;
-        console.table(results)
+        console.table(rows)
         newStart();
     });
 };
 
 const viewAllRoles = () => {
     const ql = `SELECT  role.id, role.title, role.salary deparments.deparments_name FROM role JOIN deparments ON role.deparments_id = deparment.id ORDER BY role.id ASC`;
-    db.query(ql, (err, results) => {
+    db.query(ql, (err, rows) => {
         if (err) throw err;
-        console.table(results)
+        console.table(rows)
         newStart();
     });
 
@@ -101,9 +101,9 @@ const viewAllRoles = () => {
 
 const viewAllEmployees = () => {
     const ql = `SELECT employee.id, employee.first_name, employee.last_name, role.title, deparments.name AS deparment, role.salary, employee.manager_id FROM employee JOIN role ON role.id = employee.role_id JOIN deparments on deparments.id = role.deparments_id`;
-    db.query(ql, (err, results) => {
+    db.query(ql, (err, rows) => {
         if (err) throw err;
-        console.table(results)
+        console.table(rows)
         newStart(); 
     });
 }
@@ -221,9 +221,9 @@ const addEmployee = () => {
     .then( answers => {
         let ql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
         VALUES ('${answers.first_name}', '${answers.last_name}', '${answers.role_id}', '${answers.manager_id}')`;
-        db.query(ql, (err, results) => {
+        db.query(ql, (err, rows) => {
             if (err) throw err;
-            console.table(results)
+            console.table(rows)
             newStart(); 
         });
     })
@@ -238,9 +238,9 @@ const addDepartment = () => {
     })
     .then (answers => {
         let ql = `INSERT INTO deparment (deparment_name) VALUES ('${answers.name}')`
-        db.query(ql, (err, results) => {
+        db.query(ql, (err, rows) => {
             if (err) throw err;
-            console.table(results)
+            console.table(rows)
             newStart(); 
         });
     })
@@ -290,9 +290,9 @@ const addRole = () => {
     .then (answers = () => {
         let ql = `INSERT INTO roles(title, salary, deparments_id)
         VALUES ('${answers.title}', '${answers.salary}', '${answers.deparment_id}')`;
-        db.query(ql, (err, results) => {
+        db.query(ql, (err, rows) => {
             if (err) throw err;
-            console.table(results)
+            console.table(rows)
             newStart(); 
         });
     })
@@ -399,9 +399,9 @@ const updateEmployeeRole = () => {
     ])
     .then (answers => {
         let ql = `UPDATE employee SET role_id='${answers.role}' WHERE id= '${answers.employee}'`;
-        db.query(ql, (err, results) => {
+        db.query(ql, (err, rows) => {
             if (err) throw err;
-            console.table(results)
+            console.table(rows)
             newStart(); 
         });
     })
@@ -461,9 +461,9 @@ const removeEmployee = () => {
     ])
     .then (answers => {
         let ql = `DELETE FROM employee WHERE employee.id = '${answers.id}'`;
-        db.query(ql, (err, results) => {
+        db.query(ql, (err, rows) => {
             if (err) throw err;
-            console.table(results)
+            console.table(rows)
             newStart(); 
         });
     })
