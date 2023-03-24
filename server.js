@@ -56,6 +56,11 @@ const newStart = () => {
                 break;
             case 'Remove Employee':
                 removeEmployee();
+                break
+            case 'Exit':
+                db.end();
+                break;
+
         }
     })
 }
