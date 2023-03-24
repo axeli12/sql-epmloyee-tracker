@@ -2,13 +2,22 @@ const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
-const { type } = require('os');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(express.urlencoded({ extended: false}));
 app.use(express.json());
+
+const db = mysql.createConnection(
+    {
+        host:'127.0.0.1',
+        user: 'root',
+        password: '',
+        database: 'emp_db'
+    },
+    console.log(`You have now connceted to the database`)
+)
 
 const newStart = () => {
     inquirer
