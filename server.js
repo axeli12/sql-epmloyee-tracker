@@ -87,3 +87,124 @@ const viewAllEmployees = () => {
         newStart(); 
     });
 }
+
+const addEmployee = () => {
+    inquirer
+    .prompt([
+        {
+            type: 'input',
+            name: 'first_name',
+            message: 'What is the new hire first name'
+        },
+        {
+            type: 'input',
+            name: 'last_name',
+            message: 'What is the new hire last name'
+        },
+        {
+            type: 'list',
+            name: 'role_id',
+            message: 'What is the role of the new hire',
+            choices: [
+                {
+                    name: 'Lead Sales',
+                    value: 1
+                },
+                {
+                    name: 'Lead Engineer',
+                    value: 2
+                },
+                {
+                    name: 'JR Engineer',
+                    value: 3
+                },
+                {
+                    name: 'Paralegal',
+                    value: 4
+                },
+                {
+                    name: 'Head Lawyer',
+                    value: 5
+                },
+                {
+                    name: 'jr Accountant',
+                    value: 6
+                },
+                {
+                    name: 'Accountant',
+                    value: 7
+                },
+                {
+                    name: 'Lead accountant',
+                    value: 8
+                },
+                {
+                    name: 'Lead Hr',
+                    value: 9
+                },
+                {
+                    name: 'Assistant',
+                    value: 10
+                }
+            ]
+        },
+        {
+            type: 'list',
+            name: 'manager_id',
+            message: 'What is the new hires manger id',
+            choices: [
+                {
+                    name: 'Mark Smith',
+                    value: 1 
+                },
+                {
+                    name: 'Jane Stan',
+                    value: 2
+                },
+                {
+                    name: 'Tim Star',
+                    value: 3
+                },
+                {
+                    name: 'Rachel Zane',
+                    value: 4
+                },
+                {
+                    name: 'Joahn Till',
+                    value: 5
+                },
+                {
+                    name: 'Mike Smith',
+                    value: 6
+                },
+                {
+                    name: 'Mike Bron',
+                    value: 7
+                },
+                {
+                    name: 'John Bo',
+                    value: 8
+                },
+                {
+                    name: 'Carly Shea',
+                    value: 9
+                },
+                {
+                    name: 'Tom Smith',
+                    value: 10
+                },
+            
+                
+            ]
+        },
+    ])
+    .then( answers => {
+        let ql = `INSERT INTO employee (first_name, last_name, role_id, manager_id)
+        VALUES ('${answers.first_name}', '${answers.last_name}', '${answers.role_id}', '${answers.manager_id}')`;
+        db.query(ql, (err, results) => {
+            if (err) throw err;
+            console.table(results)
+            newStart(); 
+        });
+    })
+}
