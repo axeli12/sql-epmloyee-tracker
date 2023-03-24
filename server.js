@@ -16,7 +16,6 @@ const db = mysql.createConnection(
         password: '',
         database: "emp_db"
     },
-    console.log(`You have now connceted to the database`)
     )
     db.connect((error) => {
         if(error) throw error;
@@ -46,9 +45,10 @@ const newStart = () => {
         }
     ])
     .then((answers) => {
-        const { choices } = answers;
-        switch (choices) {
+        let  choice  = answers.Choice;
+        switch (choice) {
             case 'View All Departments':
+                console.log('imhere')
                 viewAllDepartments();
                 break;
             case 'View All Roles':
@@ -90,7 +90,7 @@ const viewAllDepartments = () => {
 };
 
 const viewAllRoles = () => {
-    const ql = `SELECT  role.id, role.title, role.salary deparments.deparments_name FROM role JOIN deparments ON role.deparments_id = deparment.id ORDER BY role.id ASC`;
+    const ql = `SELECT  role.id, role.title, role.salary, deparments_id FROM role JOIN deparments ON role.deparments_id = deparments.id ORDER BY role.id ASC`;
     db.query(ql, (err, rows) => {
         if (err) throw err;
         console.table(rows)
@@ -100,7 +100,7 @@ const viewAllRoles = () => {
 };
 
 const viewAllEmployees = () => {
-    const ql = `SELECT employee.id, employee.first_name, employee.last_name, role.title, deparments.name AS deparment, role.salary, employee.manager_id FROM employee JOIN role ON role.id = employee.role_id JOIN deparments on deparments.id = role.deparments_id`;
+    const ql = `SELECT employee.id, employee.first_name, employee.last_name, role.title, deparments.name AS deparments, role.salary, employee.manager_id FROM employee JOIN role ON role.id = employee.role_id JOIN deparments on deparments.id = role.deparments_id`;
     db.query(ql, (err, rows) => {
         if (err) throw err;
         console.table(rows)
@@ -237,7 +237,7 @@ const addDepartment = () => {
         message: 'What is the name of the deparment you want to add'
     })
     .then (answers => {
-        let ql = `INSERT INTO deparment (deparment_name) VALUES ('${answers.name}')`
+        let ql = `INSERT INTO deparments (name) VALUES ('${answers.name}')`
         db.query(ql, (err, rows) => {
             if (err) throw err;
             console.table(rows)
@@ -288,7 +288,7 @@ const addRole = () => {
         }
     ])
     .then (answers = () => {
-        let ql = `INSERT INTO roles(title, salary, deparments_id)
+        let ql = `INSERT INTO role(title, salary, deparments_id)
         VALUES ('${answers.title}', '${answers.salary}', '${answers.deparment_id}')`;
         db.query(ql, (err, rows) => {
             if (err) throw err;
