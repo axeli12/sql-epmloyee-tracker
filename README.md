@@ -9,6 +9,10 @@ What this backend application is doing, it is creating a database and in that da
 * mysql
 ## video
 
+
+https://user-images.githubusercontent.com/103465115/227422678-162de5d0-f4aa-418d-be75-6dffbb916d3c.mov
+
+
 ## Usage
 This will be used for owners of companies to be able to help their employees and keep track of them.
 ## Dependecies 
